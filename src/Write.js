@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
 
-export default function Write({ saveData, post }) {
+export default function Write({ saveData, post, del }) {
   const [title, setTitle] = useState("");
   const [descrip, setDescrip] = useState("");
 
@@ -58,7 +58,7 @@ export default function Write({ saveData, post }) {
       <hr />
       <h3> your posts will show here </h3>
 
-      <Blogs post={post} />
+      <Blogs post={post} del={del} />
     </div>
   );
 }

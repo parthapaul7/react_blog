@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Posts({ element }) {
+export default function Posts({ element, del }) {
   console.log(element);
 
   return (
@@ -10,7 +10,13 @@ export default function Posts({ element }) {
         <div class="card-body">
           <h5 class="card-title">{JSON.parse(element).title}</h5>
           <p class="card-text">{JSON.parse(element).descrip}</p>
-          <button type="button" class="btn btn-danger">
+          <button
+            type="button"
+            class="btn btn-danger"
+            onClick={() => {
+              del(JSON.parse(element).title, JSON.parse(element).descrip);
+            }}
+          >
             Delete Post
           </button>
         </div>
