@@ -1,24 +1,22 @@
-import React from 'react'
-import Posts from './Posts'
+import React, { useEffect, useState} from "react";
+import Posts from "./Posts";
 
-export default function Blogs({post}) {
+export default function Blogs({ post, del}) {
+  const [refresh,setRefresh]= useState(false);
 
-    
-    
-    return (
-        <div className="container my-3">
-            <hr/>
-            <h3> your posts will show here   </h3>
-            
-            {
-            post.map((element)=>{
-                 return <Posts element= {element} post={post}/>
 
-            })
-            }
-           
-            
-            
-        </div>
-    )
+function value(){
+
+    setRefresh(!refresh);
+  }
+
+
+  
+  return (
+    <div className="container my-3">
+      {post.map((element) => {
+        return <Posts element={element} del={del} value={value} />;
+      })}
+    </div>
+  );
 }
