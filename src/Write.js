@@ -5,8 +5,9 @@ export default function Write({ saveData, post, del }) {
   const [title, setTitle] = useState("");
   const [descrip, setDescrip] = useState("");
 
+
   function saveData() {
-    if (title == "" || descrip == "")
+    if (title === "" || descrip === "")
       return alert("title and description cant be empty");
 
     let obj = { title: title, descrip: descrip };

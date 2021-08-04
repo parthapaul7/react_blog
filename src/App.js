@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Write from "./Write";
 
 function App() {
   let post = [];
-
-  const [title, setTitle] = useState("hi");
-  const [descrip, setDescrip] = useState("hi");
 
   localStorage.getItem("posts") == null
     ? (post = [])
@@ -28,14 +25,13 @@ function App() {
       } else {
         ++i;
       }
-      console.log(" delete called");
-      setTitle("");
-      setDescrip("");
+      
+
     }
   }
   return (
     <>
-      <div>{console.warn("renderd called")}</div>
+      
       <Navbar />
       <Write post={post} del={del} />
     </>

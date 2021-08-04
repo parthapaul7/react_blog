@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-export default function Posts({ element, del }) {
-  console.log(element);
+export default function Posts({ element, del, value }) {
+ 
+ 
 
   return (
     <div className="container my-3">
@@ -14,7 +15,9 @@ export default function Posts({ element, del }) {
             type="button"
             class="btn btn-danger"
             onClick={() => {
-              del(JSON.parse(element).title, JSON.parse(element).descrip);
+             del(JSON.parse(element).title, JSON.parse(element).descrip);
+             value()
+              
             }}
           >
             Delete Post
