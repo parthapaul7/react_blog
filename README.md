@@ -1,4 +1,4 @@
-#To view the app go to this link  
+# To view the app go to this link 
 https://react-blogapp-4c21a.web.app/
 
 # Getting Started with Create React App
