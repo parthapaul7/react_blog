@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+
+export default function Navbar({valid}) {
+
+ 
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/home">
             Post your Thoughts
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,56 +27,18 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/home"
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link disabled"
-                  href="#"
-                  tabindex="-1"
-                  aria-disabled="true"
-                >
-                  Disabled
-                </a>
+                <Link className="nav-link active" to="/posts">
+                  All Posts
+                </Link>
               </li>
             </ul>
             <form className="d-flex">
@@ -81,13 +48,29 @@ export default function Navbar() {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
+              <button className="btn btn-outline-success" type="button">
+                Search 
               </button>
             </form>
           </div>
         </div>
-      </nav>
+      </nav>    
+{
+  valid? null :
+      <>
+    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Title or Description Can not be empty </strong>
+      <button
+        type="button"
+        className="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    
+    </>
+  
+}
     </div>
   );
 }

@@ -1,9 +1,14 @@
+import Getstarted from "./Getstarted";
 import React from "react";
 import Navbar from "./Navbar";
 import Write from "./Write";
+import Allposts from "./Allposts";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   let post = [];
+  let valid= true;
 
   localStorage.getItem("posts") == null
     ? (post = [])
@@ -25,15 +30,25 @@ function App() {
       } else {
         ++i;
       }
-      
-
     }
   }
   return (
     <>
-      
-      <Navbar />
-      <Write post={post} del={del} />
+      <Router>
+        <Navbar valid={valid}/>
+        <Switch>
+          <Route exact path="/">
+            <Getstarted />
+          </Route>
+          <Route exact path="/home">
+            <Write post={post} del={del} valid={valid} />
+          </Route>
+
+          <Route exact path="/posts">
+            <Allposts post={post} del={del} valid={valid} />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }
