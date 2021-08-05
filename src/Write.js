@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
 
-export default function Write({ saveData, post, del }) {
+export default function Write({ saveData, post, del, valid }) {
+  let dat = Date();
+
   const [title, setTitle] = useState("");
   const [descrip, setDescrip] = useState("");
 
-
   function saveData() {
-    if (title === "" || descrip === "")
-      return alert("title and description cant be empty");
-
-    let obj = { title: title, descrip: descrip };
+    if (title === "" || descrip === "") {
+      valid = false;
+      return alert(" Title and Description can not be empty");
+    }
+    let obj = { title: title, descrip: descrip, date: dat };
 
     console.log(obj);
 
-    post.push(JSON.stringify(obj));
+    post.unshift(JSON.stringify(obj));
     localStorage.setItem("posts", JSON.stringify(post));
 
     setTitle("");
@@ -57,8 +59,8 @@ export default function Write({ saveData, post, del }) {
         Post
       </button>
       <hr />
-      <h3> your posts will show here </h3>
-
+      <h3>your posts will show here</h3>
+      <hr />
       <Blogs post={post} del={del} />
     </div>
   );
