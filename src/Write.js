@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
+import { Modal,Button } from "react-bootstrap";
 
-export default function Write({ saveData, post, del, valid }) {
+export default function Write({ saveData, post, del }) {
   let dat = Date();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [title, setTitle] = useState("");
   const [descrip, setDescrip] = useState("");
 
   function saveData() {
-    if (title === "" || descrip === "") {
-      valid = false;
-      return alert(" Title and Description can not be empty");
-    }
+    if (title === "" || descrip === "")  return handleShow();
+    
+     
     let obj = { title: title, descrip: descrip, date: dat };
 
     console.log(obj);
@@ -22,8 +27,18 @@ export default function Write({ saveData, post, del, valid }) {
     setTitle("");
     setDescrip("");
   }
-  return (
+  return ( <> 
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body> Title or Description Can not be empty </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Ok
+          </Button>
+        </Modal.Footer>
+      </Modal>
     <div className="container my-5">
+     
       <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">
           {" "}
@@ -63,5 +78,6 @@ export default function Write({ saveData, post, del, valid }) {
       <hr />
       <Blogs post={post} del={del} />
     </div>
+    </>
   );
 }

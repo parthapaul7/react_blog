@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 
-export default function Navbar({valid}) {
+export default function Navbar() {
 
  
 
@@ -55,22 +55,6 @@ export default function Navbar({valid}) {
           </div>
         </div>
       </nav>    
-{
-  valid? null :
-      <>
-    <div className="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Title or Description Can not be empty </strong>
-      <button
-        type="button"
-        className="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
-    
-    </>
-  
-}
     </div>
   );
 }

@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   let post = [];
-  let valid= true;
 
   localStorage.getItem("posts") == null
     ? (post = [])
@@ -36,17 +35,22 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar valid={valid}/>
+       
         <Switch>
           <Route exact path="/">
             <Getstarted />
+
           </Route>
           <Route exact path="/home">
-            <Write post={post} del={del} valid={valid} />
+            <Navbar />
+            <Write post={post} del={del}  />
+            
           </Route>
 
           <Route exact path="/posts">
-            <Allposts post={post} del={del} valid={valid} />
+             <Navbar />
+            <Allposts post={post} del={del} />
+           
           </Route>
         </Switch>
       </Router>
