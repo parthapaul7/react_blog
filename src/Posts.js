@@ -35,8 +35,10 @@ export default function Posts({ element, del, value, count }) {
         Delete Post
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
-       
+      <Modal show={show} onHide={handleClose}  
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
         <Modal.Body>Your Post : "{tit}" will be permanently deleted</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

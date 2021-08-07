@@ -1,18 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Posts from "./Posts";
+
+export default function Navbar({ post, del,value }) {
+  const [sea, setsea] = useState("");
+  const [searc, setsearc] = useState([]);
+  
+
+  let count = 0;
+
+  let searches = [];
 
 
-export default function Navbar() {
+  function onSearch() {
+    if (sea == "") return;
+    let hr = "";
+    let min = "";
+    let dat = "";
 
- 
+    for (let i = 0; i < post.length; i++) {
+      hr = JSON.parse(post[i]).title.toLowerCase();
+      min = JSON.parse(post[i]).descrip.toLowerCase();
+      dat = JSON.parse(post[i]).date.toLowerCase();
+
+      if (hr.includes(sea.toLowerCase()) || min.includes(sea.toLowerCase())) {
+        searches.push(post[i]);
+
+        console.log("yes we found it");
+        console.log(searches);
+      }
+    }
+
+    setsearc(searches);
+  }
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg  navbar-dark bg-dark " id="navBar">
+      {searc.map((element) => {
+        count++;
+        return (
+          <>
+            <Posts element={element} del={del} count={count} value={value} />
+          </>
+        );
+      })}
+      <h3> Search Results </h3>
+      <hr />
+      <nav
+        className="navbar navbar-expand-lg  navbar-dark bg-dark "
+        id="navBar"
+      >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
             Post your Thoughts
           </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -47,14 +89,23 @@ export default function Navbar() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={(e) => {
+                  setsea(e.target.value);
+                }}
               />
-              <button className="btn btn-outline-success" type="button">
-                Search 
+              <button
+                className="btn btn-outline-success"
+                type="button"
+                onClick={() => {
+                  onSearch();
+                }}
+              >
+                Search
               </button>
             </form>
           </div>
         </div>
-      </nav>    
+      </nav>
     </div>
   );
 }
