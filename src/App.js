@@ -1,5 +1,5 @@
 import Getstarted from "./Getstarted";
-import React from "react";
+import React,{useState} from "react";
 import Navbar from "./Navbar";
 import Write from "./Write";
 import Allposts from "./Allposts";
@@ -9,14 +9,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   let post = [];
+  let search ="";
+  const [refresh, setRefresh] = useState(false);
 
   localStorage.getItem("posts") == null
     ? (post = [])
     : (post = JSON.parse(localStorage.getItem("posts")));
 
   function del(h, m) {
-    let hr = 0;
-    let min = 0;
+    let hr = "";
+    let min = "";
 
     for (let i = 0; i < post.length; ) {
       hr = JSON.parse(post[i]).title;
@@ -31,7 +33,18 @@ function App() {
         ++i;
       }
     }
+ 
+  
   }
+  
+  function value() {
+    setRefresh(!refresh);
+    console.log(" so how is the search 😁");
+  }
+
+   
+  
+
   return (
     <>
       <Router>
@@ -42,13 +55,13 @@ function App() {
 
           </Route>
           <Route exact path="/home">
-            <Navbar />
+            <Navbar del={del}  post={post} value={value}/>
             <Write post={post} del={del}  />
             
           </Route>
 
           <Route exact path="/posts">
-             <Navbar />
+             <Navbar del={del}  post={post} value={value} />
             <Allposts post={post} del={del} />
            
           </Route>
