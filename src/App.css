@@ -27,3 +27,29 @@
   top: -50%;
 }
 
+#navBar{
+ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  z-index: 2;
+}
+
+#writing{
+  margin-top: 15vh;
+  padding-bottom: 5vh;
+  
+}
+h3{
+  margin: auto;
+  text-align: center;
+}
+
+#postBtn{
+
+padding: 0.5rem 1.5rem;
+margin: auto;
+
+}

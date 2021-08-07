@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
 import { Modal,Button } from "react-bootstrap";
+import "./App.css"
 
-export default function Write({ saveData, post, del }) {
+export default function Write({ post, del }) {
   let dat = Date();
 
   const [show, setShow] = useState(false);
@@ -37,8 +38,8 @@ export default function Write({ saveData, post, del }) {
           </Button>
         </Modal.Footer>
       </Modal>
-    <div className="container my-5">
-     
+    <div className="container " id="writing">
+    <h3 className="label1">Post something </h3>
       <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">
           {" "}
@@ -59,9 +60,10 @@ export default function Write({ saveData, post, del }) {
         <label for="formGroupExampleInput2" class="form-label">
           Description:{" "}
         </label>
-        <input
+        <textarea
           type="text"
           class="form-control"
+          
           onChange={(e) => {
             setDescrip(e.target.value);
           }}
@@ -70,11 +72,11 @@ export default function Write({ saveData, post, del }) {
           value={descrip}
         />
       </div>
-      <button type="button" class="btn btn-success" onClick={saveData}>
+      <button type="button" class="btn btn-success" id="postBtn" onClick={saveData}>
         Post
       </button>
       <hr />
-      <h3>your posts will show here</h3>
+      <h3 >Your posts will show here</h3>
       <hr />
       <Blogs post={post} del={del} />
     </div>

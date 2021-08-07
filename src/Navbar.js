@@ -8,7 +8,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg  navbar-dark bg-dark " id="navBar">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
             Post your Thoughts
