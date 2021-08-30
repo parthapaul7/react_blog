@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Posts from "./Posts";
 
-export default function Navbar({ post, del,value }) {
+export default function Navbar({ post, del, value }) {
   const [sea, setsea] = useState("");
   const [searc, setsearc] = useState([]);
-  
 
   let count = 0;
 
   let searches = [];
 
+  function wipe() {
+    localStorage.setItem("config", "/");
+    window.location.reload();
+  }
 
   function onSearch() {
     if (sea == "") return;
@@ -36,6 +39,8 @@ export default function Navbar({ post, del,value }) {
 
   return (
     <div>
+      <Redirect to={localStorage.getItem("config")} />
+
       {searc.map((element) => {
         count++;
         return (
@@ -81,6 +86,17 @@ export default function Navbar({ post, del,value }) {
                 <Link className="nav-link active" to="/posts">
                   All Posts
                 </Link>
+              </li>
+              <li className="nav-item">
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    wipe();
+                  }}
+                >
+                  {" "}
+                  Log Out
+                </button>
               </li>
             </ul>
             <form className="d-flex">

@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+  padding: 0;
+}
 .backImage{
   background-image: url(images/getstartBack.jpg);
   background-size: 100vh;
@@ -42,7 +46,7 @@
   padding-bottom: 5vh;
   
 }
-h3{
+h3,h5{
   margin: auto;
   text-align: center;
 }
@@ -52,4 +56,48 @@ h3{
 padding: 0.5rem 1.5rem;
 margin: auto;
 
+}
+
+.loginDiv{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login{
+  
+  padding: 20px;
+  margin: 0;
+  width: 40%;
+  min-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  
+}
+.googleLogin{
+  background-image: url(images/googleLogin.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  margin: 20px auto;
+  border:black solid 1px;
+  width: 200px;  
+  height: 38px;
+}
+
+.btns{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.logBtn{
+  width: 200px;  
+  height: 38px;
+  margin: auto;
 }
