@@ -1,9 +1,13 @@
 # To view the app go to this link 
 https://react-blogapp-4c21a.web.app/
 
+
 # login details
-id--- partha@admin.com
-password - iamadmin
+
+**Id:** partha@admin.com
+**Password:** iamadmin
+
+  
 
 try this✌
 
