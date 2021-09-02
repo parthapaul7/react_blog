@@ -88,6 +88,8 @@ margin: auto;
   border:black solid 1px;
   width: 200px;  
   height: 38px;
+
+  cursor: pointer;
 }
 
 .btns{
@@ -100,4 +102,8 @@ margin: auto;
   width: 200px;  
   height: 38px;
   margin: auto;
+}
+#recap{
+  background-color: yellow;
+  height: 50px;
 }

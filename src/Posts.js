@@ -1,5 +1,16 @@
 import React,{useState} from "react";
 import { Button,Modal } from "react-bootstrap";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  getDocs,
+  doc,
+  setDoc,
+  deleteDoc 
+} from "firebase/firestore";
+import { db } from "./fire";
 
 export default function Posts({ element, del, value, count }) {
   const [show, setShow] = useState(false);

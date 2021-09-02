@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import Blogs from "./Blogs";
 import { Modal,Button } from "react-bootstrap";
 import "./App.css"
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  getDocs,
+  doc,
+  setDoc,
+  deleteDoc 
+} from "firebase/firestore";
+import { db } from "./fire";
 
 export default function Write({ post, del }) {
   let dat = Date();
@@ -27,6 +38,9 @@ export default function Write({ post, del }) {
 
     setTitle("");
     setDescrip("");
+   
+    setDoc(doc(db, "blogData", dat), { title:title, desc:descrip, date:dat });
+
   }
   return ( <> 
 
