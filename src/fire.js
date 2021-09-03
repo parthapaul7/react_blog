@@ -38,11 +38,14 @@ export const Glogin = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      console.log(user.email);
+      
 
       console.log("success fully signed");
 
       localStorage.setItem("config", "/home");
-      window.location.reload();
+      localStorage.setItem("id",user.email)
+      // window.location.reload();
     })
     .catch((error) => {
       // Handle Errors here.

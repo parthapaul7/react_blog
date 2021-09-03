@@ -10,7 +10,26 @@ import {
   setDoc,
   deleteDoc 
 } from "firebase/firestore";
-import { db } from "./fire";
+import { db } from "../fire";
+
+function getDatas(){
+
+  const querySnapshot = getDocs(collection(db, "titles"));
+  
+  querySnapshot.then((res) => {
+    console.log(res.docs);
+    res.docs.forEach((data) => {
+      let docum= data.id
+      console.log(data.id);
+  
+      const docRef = doc(db, "titles", docum);  // for specified id
+  
+      getDoc(docRef).then((res) => {
+        console.log(res.data());
+      });
+    });
+  });
+  }
 
 export default function Posts({ element, del, value, count }) {
   const [show, setShow] = useState(false);
@@ -39,7 +58,7 @@ export default function Posts({ element, del, value, count }) {
         </div>
         <div className="card-body">
           <h5 className="card-title">{JSON.parse(element).title}</h5>
-          <p className="card-text">{JSON.parse(element).descrip}</p>
+          <pre className="card-text">{JSON.parse(element).descrip}</pre>
           
 
           <Button variant="danger" onClick={()=>{handleShow();pass(JSON.parse(element).title,JSON.parse(element).descrip)}}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
 import { Modal,Button } from "react-bootstrap";
-import "./App.css"
+import "../App.css"
 import {
   getFirestore,
   collection,
@@ -12,10 +12,15 @@ import {
   setDoc,
   deleteDoc 
 } from "firebase/firestore";
-import { db } from "./fire";
+import { db } from "../fire";
+// import {userId} from "./Getstarted"
+// console.log(userId);
+
 
 export default function Write({ post, del }) {
+  let user= localStorage.getItem("id")
   let dat = Date();
+
 
   const [show, setShow] = useState(false);
 
@@ -26,9 +31,8 @@ export default function Write({ post, del }) {
   const [descrip, setDescrip] = useState("");
 
   function saveData() {
-    if (title === "" || descrip === "")  return handleShow();
     
-     
+    if (title != "" && descrip != ""){
     let obj = { title: title, descrip: descrip, date: dat };
 
     console.log(obj);
@@ -39,55 +43,52 @@ export default function Write({ post, del }) {
     setTitle("");
     setDescrip("");
    
-    setDoc(doc(db, "blogData", dat), { title:title, desc:descrip, date:dat });
-
+    setDoc(doc(db, user, title), { title:title, desc:descrip, date:dat });
+    
+    }
   }
   return ( <> 
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body> Title or Description Can not be empty </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Ok
-          </Button>
-        </Modal.Footer>
-      </Modal>
     <div className="container " id="writing">
     <h3 className="label1">Post something </h3>
-      <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">
+      <div className="mb-3">
+        <label htmlFor="formGroupExampleInput" className="form-label">
           {" "}
           Title :{" "}
         </label>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           onChange={(e) => {
             setTitle(e.target.value);
+            // if (title != " " &&title != "" && descrip != "") setisDisabled(false)
           }}
           id="formGroupExampleInput"
           placeholder="Example input placeholder"
           value={title}
+         
         />
       </div>
-      <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">
+      <div className="mb-3">
+        <label htmlFor="formGroupExampleInput2" className="form-label">
           Description:{" "}
         </label>
+   
         <textarea
           type="text"
-          class="form-control"
+          className="form-control"
           
           onChange={(e) => {
             setDescrip(e.target.value);
+            
           }}
           id="formGroupExampleInput2"
           placeholder="Another input placeholder"
           value={descrip}
         />
       </div>
-      <button type="button" class="btn btn-success" id="postBtn" onClick={saveData}>
-        Post
+      <button type="button" className="btn btn-success" id="postBtn" onClick={saveData} disabled={title.length===0 || descrip.length===0}>
+        Post 
       </button>
       <hr />
       <h3 >Your posts will show here</h3>

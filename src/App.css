@@ -2,17 +2,7 @@ body{
   margin: 0;
   padding: 0;
 }
-.backImage{
-  background-image: url(images/getstartBack.jpg);
-  background-size: 100vh;
 
-  text-align: center;
-  opacity: 0.5;
-
-  width: 100vw;
-  height: 100vh;
-
-}
 .start{
   
   position: absolute;
@@ -46,7 +36,12 @@ body{
   padding-bottom: 5vh;
   
 }
-h3,h5{
+h3{
+  margin: auto;
+  text-align: center;
+}
+.loginText
+{
   margin: auto;
   text-align: center;
 }

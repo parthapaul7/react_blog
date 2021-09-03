@@ -56,9 +56,9 @@ export default function Navbar({ post, del, value }) {
         id="navBar"
       >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <div className="navbar-brand">
             Post your Thoughts
-          </Link>
+          </div>
 
           <button
             className="navbar-toggler"
