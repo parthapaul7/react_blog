@@ -11,6 +11,7 @@ export default function Navbar({ post, del, value }) {
   let searches = [];
 
   function wipe() {
+    localStorage.clear()
     localStorage.setItem("config", "/");
     window.location.reload();
   }

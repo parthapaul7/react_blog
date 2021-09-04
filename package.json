@@ -1,5 +1,6 @@
 {
   "name": "blog-app",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,4 +45,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5"
   }
+ 
+
 }

@@ -43,7 +43,7 @@ export default function Write({ post, del }) {
     setTitle("");
     setDescrip("");
    
-    setDoc(doc(db, user, title), { title:title, desc:descrip, date:dat });
+    setDoc(doc(db, user, title), { title:title, descrip:descrip, date:dat });
     
     }
   }

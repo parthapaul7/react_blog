@@ -4,10 +4,7 @@ import "../App.css";
 import Fire, { Glogin, db } from "../fire";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPhoneNumber,
-  RecaptchaVerifier,
 } from "firebase/auth";
 
 import { Alert } from "react-bootstrap";
@@ -27,21 +24,7 @@ export default function Getstarted() {
 
  
 
-  function createId() {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, "ppartha@wtf.com", "1234521")
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log("done signed in");
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
-  }
+ 
 
   function emailLogin(id, pass) {
     console.log(id, pass);
@@ -72,37 +55,6 @@ export default function Getstarted() {
      
   }
 
-  /// not working btw
-  function phoneSignIn(params) {
-    const auth = getAuth();
-    auth.languageCode = "it";
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recap",
-      {
-        size: "invisible",
-        callback: (response) => {
-          console.log(" it worked the");
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-        },
-      },
-      auth
-    );
-    console.log(window.recaptchaVerifier);
-
-    signInWithPhoneNumber(auth, "", window.recaptchaVerifier)
-      .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
-        window.confirmationResult = confirmationResult;
-        console.log("sms sent");
-        // ...
-      })
-      .catch((error) => {
-        // Error; SMS not sent
-        console.warn(" some errors");
-        // ...
-      });
-  }
   return (
     <>
       <div className="loginDiv">
