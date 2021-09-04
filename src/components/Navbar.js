@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import Posts from "./Posts";
 
 export default function Navbar({ post, del, value }) {
   const [sea, setsea] = useState("");
   const [searc, setsearc] = useState([]);
-
+  const [active, setactive] = useState('active')
   let count = 0;
 
   let searches = [];
@@ -38,6 +38,14 @@ export default function Navbar({ post, del, value }) {
     setsearc(searches);
   }
 
+  function navLink(){
+    let boxes= document.getElementsByTagName('a')
+    
+    for(let i=0;i<boxes.length;i++){
+      boxes[i].className="nav-link"
+      
+    }
+  }
   return (
     <div>
       <Redirect to={localStorage.getItem("config")} />
@@ -79,14 +87,22 @@ export default function Navbar({ post, del, value }) {
                   className="nav-link active"
                   aria-current="page"
                   to="/home"
+                  onClick={(e)=>{navLink(); e.target.className="nav-link active"}
+
+                  }
                 >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" to="/posts">
+                <Link className="nav-link" to="/posts" onClick={(e)=>{navLink() ; e.target.className="nav-link active"}}>
                   All Posts
                 </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link ">
+              {localStorage.getItem('id')}
+              </Link>
               </li>
               <li className="nav-item">
                 <button
