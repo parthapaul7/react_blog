@@ -45,6 +45,4 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5"
   }
- 
-
 }

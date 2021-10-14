@@ -9,3 +9,6 @@ export default function Allposts({post,del}) {
         </div>
     )
 }
+
+
+// adding some bullshit comments
