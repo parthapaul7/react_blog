@@ -81,7 +81,7 @@ export default function Navbar({ post, del, value }) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto d-flex">
               <li className="nav-item">
                 <Link
                   className="nav-link active"
@@ -100,13 +100,13 @@ export default function Navbar({ post, del, value }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link ">
+                <div className="nav-link"  >
               {localStorage.getItem('id')}
-              </Link>
+              </div>
               </li>
               <li className="nav-item">
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger mr-auto p-2"
                   onClick={() => {
                     wipe();
                   }}
@@ -127,7 +127,7 @@ export default function Navbar({ post, del, value }) {
                 }}
               />
               <button
-                className="btn btn-outline-success"
+                className="btn btn-success"
                 type="button"
                 onClick={() => {
                   onSearch();

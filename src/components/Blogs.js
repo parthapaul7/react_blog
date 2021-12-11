@@ -19,7 +19,7 @@ function value(){
     <div className="container my-3">
       {post.map((element) => {
         count++;
-        return <Posts element={element} del={del} value={value} count={count} />;
+        return <Posts element={element} del={del} value={value} count={count} key={count} />;
       })}
     </div>
   );
