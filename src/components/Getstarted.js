@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 
 import { Alert } from "react-bootstrap";
+import { login, newUser } from "../Auth/control";
 
 if (localStorage.getItem("config") == null) {
   localStorage.setItem("config", "/");
@@ -28,58 +29,85 @@ export default function Getstarted() {
 
   const [createAlert, setCreateAlert] = useState(" Enter your credentials");
   const [createVari, setCreateVari] = useState("warning");
-  const [match, setMatch] = useState(false)
+  const [match, setMatch] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function emailLogin(id, pass) {
-    console.log(id, pass);
-    const auth = getAuth();
-    setaler("logging In .... ");
-    setvari("primary");
-    signInWithEmailAndPassword(auth, id, pass)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        val = "/home";
-        localStorage.setItem("config", "/home");
-        localStorage.setItem("id", id);
-        setaler("Login To Enter");
+  // function emailLogin(id, pass) {
+  //   console.log(id, pass);
+  //   const auth = getAuth();
+  //   setaler("logging In .... ");
+  //   setvari("primary");
+  //   signInWithEmailAndPassword(auth, id, pass)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       val = "/home";
+  //       localStorage.setItem("config", "/home");
+  //       localStorage.setItem("id", id);
+  //       setaler("Login To Enter");
 
-        window.location.reload();
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(" access denied ");
-        setaler("Failed to Log In ! try again");
-        setvari("danger");
-      });
+  //       window.location.reload();
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(" access denied ");
+  //       setaler("Failed to Log In ! try again");
+  //       setvari("danger");
+  //     });
+  // }
+
+  async function emailLogin(email, password) {
+    const user = await login(email, password);
+    console.log(user);
+
+    if (!user.id) {
+      setaler("Email or password is wrong ! try again");
+      setvari("danger");
+      console.log(" email or password is wrong");
+    } else {
+      val = "/home";
+      localStorage.setItem("config", "/home");
+      localStorage.setItem("id", email);
+      setaler("Login To Enter");
+
+      window.location.reload();
+    }
   }
 
-  function createNewAccount() {
-    console.log("new account");
+  // function createNewAccount() {
+  //   console.log("new account");
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, newId, newPass)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        setCreateAlert(" Account Created!  Log in");
-        setCreateVari("success");
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setCreateVari("danger");
-        setCreateAlert(errorMessage);
+  //   const auth = getAuth();
+  //   createUserWithEmailAndPassword(auth, newId, newPass)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       setCreateAlert(" Account Created!  Log in");
+  //       setCreateVari("success");
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       setCreateVari("danger");
+  //       setCreateAlert(errorMessage);
 
-        // ..
-      });
+  //       // ..
+  //     });
+  // }
+
+  async function createNewAccount( ){
+    try{await newUser( newId,newPass)}
+    catch(err){
+      console.log(err);
+      
+    }
+
   }
 
   return (
@@ -131,7 +159,9 @@ export default function Getstarted() {
               type="checkbox"
               className="form-check-input"
               id="exampleCheck1"
-              onClick={(e)=>{ console.log(e.target.value)}}
+              onClick={(e) => {
+                console.log(e.target.value);
+              }}
             />
             <label className="form-check-label" htmlFor="exampleCheck1">
               Remember Me
@@ -194,10 +224,12 @@ export default function Getstarted() {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>{match?"Password Matched ":"Password not Matched "}</Form.Label>
+                    <Form.Label>
+                      {match ? "Password Matched " : "Password not Matched "}
+                    </Form.Label>
                     <Form.Control
                       type="password"
-                      placeholder= "Re-enter Password"
+                      placeholder="Re-enter Password"
                       onChange={(e) => {
                         newPass == e.target.value
                           ? setMatch(true)
@@ -207,7 +239,7 @@ export default function Getstarted() {
                   </Form.Group>
 
                   <Button
-                    variant= "primary"
+                    variant="primary"
                     type="submit"
                     disabled={!match}
                     onClick={(e) => {

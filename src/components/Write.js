@@ -16,6 +16,7 @@ import { db } from "../fire";
 // import {userId} from "./Getstarted"
 // console.log(userId);
 
+import { postData } from "../Auth/control";
 
 export default function Write({ post, del }) {
   let user= localStorage.getItem("id")
@@ -32,7 +33,7 @@ export default function Write({ post, del }) {
 
   function saveData() {
     
-    if (title != "" && descrip != ""){
+   
     let obj = { title: title, descrip: descrip, date: dat };
 
     console.log(obj);
@@ -42,10 +43,10 @@ export default function Write({ post, del }) {
 
     setTitle("");
     setDescrip("");
-   
+      
+    postData(localStorage.getItem("id"), title, descrip)
     setDoc(doc(db, user, title), { title:title, descrip:descrip, date:dat });
     
-    }
   }
   return ( <> 
 
