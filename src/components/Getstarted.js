@@ -3,11 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import "../App.css";
 import Fire, { Glogin, db } from "../fire";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+
 
 import { Alert } from "react-bootstrap";
 import { login, newUser } from "../Auth/control";
@@ -23,6 +19,7 @@ export default function Getstarted() {
 
   const [newId, setNewId] = useState("");
   const [newPass, setNewPass] = useState("");
+  const [newName, setNewName] = useState("");
 
   const [aler, setaler] = useState("Login To Enter");
   const [vari, setvari] = useState("warning");
@@ -35,33 +32,9 @@ export default function Getstarted() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // function emailLogin(id, pass) {
-  //   console.log(id, pass);
-  //   const auth = getAuth();
-  //   setaler("logging In .... ");
-  //   setvari("primary");
-  //   signInWithEmailAndPassword(auth, id, pass)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       val = "/home";
-  //       localStorage.setItem("config", "/home");
-  //       localStorage.setItem("id", id);
-  //       setaler("Login To Enter");
-
-  //       window.location.reload();
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(" access denied ");
-  //       setaler("Failed to Log In ! try again");
-  //       setvari("danger");
-  //     });
-  // }
-
   async function emailLogin(email, password) {
+    setvari("primary");
+    setaler("logging in .....");
     const user = await login(email, password);
     console.log(user);
 
@@ -79,35 +52,15 @@ export default function Getstarted() {
     }
   }
 
-  // function createNewAccount() {
-  //   console.log("new account");
 
-  //   const auth = getAuth();
-  //   createUserWithEmailAndPassword(auth, newId, newPass)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       setCreateAlert(" Account Created!  Log in");
-  //       setCreateVari("success");
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       setCreateVari("danger");
-  //       setCreateAlert(errorMessage);
-
-  //       // ..
-  //     });
-  // }
-
-  async function createNewAccount( ){
-    try{await newUser( newId,newPass)}
-    catch(err){
+  async function createNewAccount() {
+    try {
+      await newUser(newName, newId, newPass);
+      setCreateAlert(" Account Created!  Log in");
+      setCreateVari("success");
+    } catch (err) {
       console.log(err);
-      
     }
-
   }
 
   return (
@@ -137,6 +90,8 @@ export default function Getstarted() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={(e) => {
+                setaler("Login To Enter");
+
                 id = e.target.value;
               }}
             />
@@ -150,6 +105,8 @@ export default function Getstarted() {
               className="form-control"
               id="exampleInputPassword1"
               onChange={(e) => {
+                setaler("Login To Enter");
+
                 pass = e.target.value;
               }}
             />
@@ -202,6 +159,16 @@ export default function Getstarted() {
                   <strong>{createAlert}</strong>
                 </Alert>
                 <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter Name"
+                      onChange={(e) => {
+                        setNewName(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control

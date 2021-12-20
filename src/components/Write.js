@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import Blogs from "./Blogs";
-import { Modal,Button } from "react-bootstrap";
 import "../App.css"
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc 
-} from "firebase/firestore";
-import { db } from "../fire";
-// import {userId} from "./Getstarted"
-// console.log(userId);
+
 
 import { postData } from "../Auth/control";
 
@@ -45,7 +32,7 @@ export default function Write({ post, del }) {
     setDescrip("");
       
     postData(localStorage.getItem("id"), title, descrip)
-    setDoc(doc(db, user, title), { title:title, descrip:descrip, date:dat });
+    
     
   }
   return ( <> 

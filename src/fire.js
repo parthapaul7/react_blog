@@ -20,16 +20,15 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDIcLrBkPAd1Jb3EX82hRb2_hkrgP9Zgic",
+  apiKey: process.env.React_App_Firebase_apiKey,
   authDomain: "react-blogapp-4c21a.firebaseapp.com",
-  databaseURL:
-    "https://react-blogapp-4c21a-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL:process.env.React_App_Firebase_rDatabase,
   projectId: "react-blogapp-4c21a",
   storageBucket: "react-blogapp-4c21a.appspot.com",
   messagingSenderId: "599656751034",
   appId: "1:599656751034:web:3f7427dd11d06162464783",
   measurementId: "G-BTYPWXMKBN",
-};
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

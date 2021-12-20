@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "../fire";
+
 import { getData, delPost } from "../Auth/control.js";
 
 export default function Posts({ element, del, value, count }) {
@@ -40,21 +30,7 @@ export default function Posts({ element, del, value, count }) {
       console.log(e.title, e.descrip, e.Date);
     });
 
-    // const querySnapshot = getDocs(collection(db, "titles"));
-
-    // querySnapshot.then((res) => {
-    //   console.log(res.docs);
-    //   res.docs.forEach((data) => {
-    //     let docum= data.id
-    //     console.log(data.id);
-
-    //     const docRef = doc(db, "titles", docum);  // for specified id
-
-    //     getDoc(docRef).then((res) => {
-    //       console.log(res.data());
-    //     });
-    //   });
-    // });
+    
   }
 
   // getDatas()

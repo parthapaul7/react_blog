@@ -1,7 +1,7 @@
 import axios from "axios";
 import md5 from "md5";
 import qs from "qs"
-const apiKey = "https://warm-shore-07971.herokuapp.com/data";
+const apiKey = process.env.React_App_apiKey;
 async function getData() {
   const datas = await axios.get(apiKey);
   return datas.data;
@@ -29,9 +29,10 @@ async function login(email, password) {
   return { id: id, posts: posts };
 }
 
-async function newUser(email, password) {
+async function newUser(name , email, password) {
 
     let data= {
+        name: name,
         email: email,
         password: password,
       }
