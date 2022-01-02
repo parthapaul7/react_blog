@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import { getData, delPost } from "../Auth/control.js";
 
-export default function Posts({ element, del, value, count }) {
+export default function Posts({ element, value, count,post }) {  // post is a useState function
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -12,6 +12,9 @@ export default function Posts({ element, del, value, count }) {
   const [tit, settit] = useState("default");
   const [desc, setdesc] = useState("default");
   const [id, setId] = useState("");
+  let date =new Date(JSON.parse(element).Date)
+  
+
   function pass(a, b, c) {
     settit(a);
     setdesc(b);
@@ -39,7 +42,7 @@ export default function Posts({ element, del, value, count }) {
     <div className="container my-3">
       <div className="card">
         <div className="card-header">
-          <p>SL no. {count}</p> <p> Posted at --- {JSON.parse(element).Date}</p>
+          <p>SL no. {count}</p> <span>{date.toDateString()}</span><span>{date.getHours()}</span>
         </div>
         <div className="card-body">
           <h5 className="card-title">{JSON.parse(element).title}</h5>
@@ -76,11 +79,13 @@ export default function Posts({ element, del, value, count }) {
               </Button>
               <Button
                 variant="danger"
-                onClick={() => {
+                onClick={async () => {
                   handleClose();
-                  del(tit, desc);
-                  delPost(id);
-                  value();
+                  await delPost(id);
+                  let val= await getData();
+                  
+                  post(val);
+                
                 }}
               >
                 Delete

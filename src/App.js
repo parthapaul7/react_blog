@@ -12,6 +12,7 @@ import { getData } from "./Auth/control.js";
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [postshow, setPostshow] = useState(false);
+  const [post, setPost] = useState([]);
 
   useEffect(() => {
     getDatas();
@@ -19,48 +20,19 @@ function App() {
   }, []);
 
   async function getDatas() {
-    let allData = await getData();
+    let allData = await getData(); // getData() has already setItem into local storage
+    console.log(allData);
 
-    let postData = allData.filter((e) => {
-      return e.email == localStorage.getItem("id");
-    })[0].posts;
-
-    let arr = postData.map((e) => {
-      return JSON.stringify(e);
-    });
-    localStorage.setItem("posts", JSON.stringify(arr));
-    console.log("item is set", postData);
+    setPost(JSON.parse(localStorage.getItem("posts")));
+    // console.log("item is set", postData);
     setPostshow(true);
-
-    postData.map((e, i) => {
-      console.log(e.title, e.descrip, e.Date);
-    });
+    console.log("late me hona cahiye");
   }
 
-  let post = [];
+  // let post = [];
+  console.log(post, " this is post");
+
   let search = "";
-
-  localStorage.getItem("posts") == null
-    ? (post = [])
-    : (post = JSON.parse(localStorage.getItem("posts")));
-
-  function del(h, m) {
-    let hr = "";
-    let min = "";
-
-    for (let i = 0; i < post.length; ) {
-      hr = JSON.parse(post[i]).title;
-      min = JSON.parse(post[i]).descrip;
-
-      if (hr === h && min === m) {
-        post.splice(i, 1);
-
-        localStorage.setItem("posts", JSON.stringify(post));
-      } else {
-        ++i;
-      }
-    }
-  }
 
   function value() {
     setRefresh(!refresh);
@@ -75,13 +47,13 @@ function App() {
             <Getstarted />
           </Route>
           <Route exact path="/home">
-            <Navbar del={del} post={post} value={value} />
-            <Write post={post} del={del} />
+            <Navbar post={post} value={value} />
+            <Write post={post} />
           </Route>
 
           <Route exact path="/posts">
-            <Navbar del={del} post={post} value={value} />
-            <Allposts post={post} del={del} />
+            <Navbar post={post} value={value} />
+            <Allposts post={post}  />
           </Route>
         </Switch>
       </Router>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import Posts from "./Posts";
 
-export default function Navbar({ post, del, value }) {
+export default function Navbar({ post, value }) {
   const [sea, setsea] = useState("");
   const [searc, setsearc] = useState([]);
   const [active, setactive] = useState('active')
@@ -54,7 +54,7 @@ export default function Navbar({ post, del, value }) {
         count++;
         return (
           <>
-            <Posts element={element} del={del} count={count} value={value} />
+            <Posts element={element} count={count} value={value} />
           </>
         );
       })}

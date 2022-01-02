@@ -19,6 +19,8 @@ import {
   RecaptchaVerifier,
 } from "firebase/auth";
 
+import { newUser } from "./Auth/control"; 
+
 const firebaseConfig = {
   apiKey: process.env.React_App_Firebase_apiKey,
   authDomain: "react-blogapp-4c21a.firebaseapp.com",
@@ -35,17 +37,19 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
-export const Glogin = () => {
+export const Glogin =  function() {
   console.log(" brilliant");
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(async (result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
       console.log(user.email);
-      
+      console.log(user.name);
+
+      await newUser(user.displayName, user.email, user.uid)
 
       console.log("success fully signed");
 
