@@ -26,11 +26,10 @@ function App() {
     setPost(JSON.parse(localStorage.getItem("posts")));
     // console.log("item is set", postData);
     setPostshow(true);
-    console.log("late me hona cahiye");
+
   }
 
-  // let post = [];
-  console.log(post, " this is post");
+  // let post = []
 
   let search = "";
 

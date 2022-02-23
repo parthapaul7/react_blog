@@ -36,12 +36,12 @@ export default function Getstarted() {
     setvari("primary");
     setaler("logging in .....");
     const user = await login(email, password);
-    console.log(user);
 
     if (!user.id) {
       setaler("Email or password is wrong ! try again");
       setvari("danger");
-      console.log(" email or password is wrong");
+      setCreateAlert("user already exist ! use differnt email id")
+      setCreateVari("danger")
     } else {
       val = "/home";
       localStorage.setItem("config", "/home");
@@ -58,6 +58,7 @@ export default function Getstarted() {
       await newUser(newName, newId, newPass);
       setCreateAlert(" Account Created!  Log in");
       setCreateVari("success");
+      emailLogin(newId,newPass)
     } catch (err) {
       console.log(err);
     }
